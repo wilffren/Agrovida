@@ -1,0 +1,16 @@
+ground_type,irrigation_system,used_fertilizer
+Sandy,Sprinkler,Compost
+Sandy,Sprinkler,Manure
+Clay,None,None
+Clay,Drip,NPK
+Loam,Sprinkler,None
+Silt,Drip,None
+Loam,Drip,Compost
+Peaty,Sprinkler,Manure
+Loam,Sprinkler,Manure
+Clay,None,NPK
+Loam,None,None
+Clay,None,NPK
+Silt,None,Compost
+Peaty,Drip,Compost
+Silt,Sprinkler,NPK

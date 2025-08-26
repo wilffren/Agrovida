@@ -1,9 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const XLSX = require('xlsx');
+import fs from 'fs';
+import path from 'path';
+import XLSX from 'xlsx';
+import { fileURLToPath } from 'url';
 
-const docsFolder = path.join(__dirname, 'docs');
-const dataFolder = path.join(__dirname, 'data');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const docsFolder = path.join(__dirname, '../docs');
+const dataFolder = path.join(__dirname, './server/data');
 
 fs.readdirSync(docsFolder).forEach(file => {
   if (file.endsWith('.xlsx')) {
