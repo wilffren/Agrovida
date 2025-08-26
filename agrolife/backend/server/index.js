@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ruta para servir archivos CSV convertidos
+// route for csv transformed files
 app.get("/csv/:filename", (req, res) => {
     const csvDir = path.join(process.cwd(), "../server/data");
     const filePath = path.join(csvDir, req.params.filename);
