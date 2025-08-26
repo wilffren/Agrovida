@@ -24,15 +24,15 @@ export async function loadFarms() {
                 try {
                     const sql = 'INSERT INTO farms (id_farm, name_farm, region, id_corp, id_sensor, id_product) VALUES ?';
                     const [result] = await pool.query(sql, [farms]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registros en farms.`);
+                    console.log(`✅  inserts ${result.affectedRows} registers on farms.`);
                     resolve();
                 } catch (error) {
-                    console.error('❌ Error al insertar farms:', error.message);
+                    console.error('❌ Error to insert farms:', error.message);
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error al leer el archivo CSV de farms:', err.message);
+                console.error('❌ Error to read the file CSV of farms:', err.message);
                 reject(err);
             });
     });

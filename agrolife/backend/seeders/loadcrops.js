@@ -24,15 +24,15 @@ export async function loadCrops() {
                 try {
                     const sql = 'INSERT INTO crops (id_corp, variety_corp, type_corp, value, production, date_time) VALUES ?';
                     const [result] = await pool.query(sql, [crops]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registros en crops.`);
+                    console.log(`✅ inserts ${result.affectedRows} registers on crops.`);
                     resolve();
                 } catch (error) {
-                    console.error('❌ Error al insertar crops:', error.message);
+                    console.error('❌ Error to insert crops:', error.message);
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error al leer el archivo CSV de crops:', err.message);
+                console.error('❌ Error to read the file CSV of crops:', err.message);
                 reject(err);
             });
     });

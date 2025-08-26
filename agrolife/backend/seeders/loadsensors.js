@@ -22,15 +22,15 @@ export async function loadSensors() {
                 try {
                     const sql = 'INSERT INTO sensors (id_sensor, id_of_sensor, type_sensor, estate_sensor) VALUES ?';
                     const [result] = await pool.query(sql, [sensors]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registros en sensors.`);
+                    console.log(`✅ inserts ${result.affectedRows} registers on sensors.`);
                     resolve();
                 } catch (error) {
-                    console.error('❌ Error al insertar sensors:', error.message);
+                    console.error('❌ Error to insert sensors:', error.message);
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error al leer el archivo CSV de sensors:', err.message);
+                console.error('❌ Error to read the file CSV of sensors:', err.message);
                 reject(err);
             });
     });

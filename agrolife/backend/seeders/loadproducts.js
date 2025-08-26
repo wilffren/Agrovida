@@ -23,15 +23,15 @@ export async function loadProducts() {
                 try {
                     const sql = 'INSERT INTO products (id_product, ground_type, irrigation_system, used_fertilizer, id_organic) VALUES ?';
                     const [result] = await pool.query(sql, [products]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registros en products.`);
+                    console.log(`✅ inserts ${result.affectedRows} registers on products.`);
                     resolve();
                 } catch (error) {
-                    console.error('❌ Error al insertar products:', error.message);
+                    console.error('❌ Error to insert products:', error.message);
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error al leer el archivo CSV de products:', err.message);
+                console.error('❌ Error to read the file CSV of products:', err.message);
                 reject(err);
             });
     });

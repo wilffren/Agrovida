@@ -20,7 +20,7 @@ export async function loadOrganics() {
                 try {
                     const sql = 'INSERT INTO organics (id_organic, abbreviation) VALUES ?';
                     const [result] = await pool.query(sql, [organics]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registers on organics.`);
+                    console.log(`✅ inserts ${result.affectedRows} registers on organics.`);
                     resolve();
                 } catch (error) {
                     console.error('❌ Error to insert organics:', error.message);

@@ -22,15 +22,15 @@ export async function loadTechnicians() {
                 try {
                     const sql = 'INSERT INTO technicians (id_technician, technician, date_maintenance, id_sensor) VALUES ?';
                     const [result] = await pool.query(sql, [technicians]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registros en technicians.`);
+                    console.log(`✅ inserts ${result.affectedRows} registers on technicians.`);
                     resolve();
                 } catch (error) {
-                    console.error('❌ Error al insertar technicians:', error.message);
+                    console.error('❌ Error to insert technicians:', error.message);
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error al leer el archivo CSV de technicians:', err.message);
+                console.error('❌ Error to read the file CSV of technicians:', err.message);
                 reject(err);
             });
     });
