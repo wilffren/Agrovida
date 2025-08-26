@@ -4,7 +4,7 @@ import csv from 'csv-parser';
 import { pool } from "../server/conection_db.js";
 
 export async function loadOrganics() {
-    const filePath = path.resolve('server/data/organics.csv');
+    const filePath = path.resolve('../server/data/organics.csv');
     const organics = [];
 
     return new Promise((resolve, reject) => {
