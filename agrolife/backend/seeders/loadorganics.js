@@ -20,15 +20,15 @@ export async function loadOrganics() {
                 try {
                     const sql = 'INSERT INTO organics (id_organic, abbreviation) VALUES ?';
                     const [result] = await pool.query(sql, [organics]);
-                    console.log(`✅ Se insertaron ${result.affectedRows} registros en organics.`);
+                    console.log(`✅ Se insertaron ${result.affectedRows} registers on organics.`);
                     resolve();
                 } catch (error) {
-                    console.error('❌ Error al insertar organics:', error.message);
+                    console.error('❌ Error to insert organics:', error.message);
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error al leer el archivo CSV de organics:', err.message);
+                console.error('❌ Error to read the file  CSV of organics:', err.message);
                 reject(err);
             });
     });
