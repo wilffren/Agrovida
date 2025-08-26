@@ -5,7 +5,7 @@ const router = Router();
 
 //organics//
 
-// 1. Obtener todos los registros de organics
+// 1. Get all organic records
 router.get("/organics", async (req, res) => {
     try {
         const [rows] = await pool.query(`SELECT * FROM organics`);
@@ -15,7 +15,7 @@ router.get("/organics", async (req, res) => {
     }
 });
 
-// 2. Obtener un registro de organics por ID
+// 2. Get a record of organics by ID
 router.get("/organics/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -24,7 +24,7 @@ router.get("/organics/:id", async (req, res) => {
             [id]
         );
         if (rows.length === 0) {
-            return res.status(404).json({ mensaje: "Orgánico no encontrado" });
+            return res.status(404).json({ mensaje: "Orgánic not found" });
         }
         res.json(rows[0]);
     } catch (error) {
@@ -32,13 +32,13 @@ router.get("/organics/:id", async (req, res) => {
     }
 });
 
-// 3. Crear un registro en organics
+// 3. Create a record in organics
 router.post("/organics", async (req, res) => {
     try {
         const { abbreviation } = req.body;
 
         if (!abbreviation) {
-            return res.status(400).json({ mensaje: "El campo abbreviation es requerido" });
+            return res.status(400).json({ mensaje: "the field abbreviation is required" });
         }
 
         const [result] = await pool.query(
@@ -46,13 +46,13 @@ router.post("/organics", async (req, res) => {
             [abbreviation]
         );
 
-        res.status(201).json({ mensaje: "Orgánico creado exitosamente", id: result.insertId });
+        res.status(201).json({ mensaje: "Organic successfully created", id: result.insertId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Actualizar un registro en organics
+// 4. Update a record in organics
 router.put("/organics/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -64,16 +64,16 @@ router.put("/organics/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Orgánico no encontrado" });
+            return res.status(404).json({ mensaje: "Organic not found" });
         }
 
-        res.json({ mensaje: "Orgánico actualizado exitosamente" });
+        res.json({ mensaje: "Organic successfully updated" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 5. Eliminar un registro en organics
+// 5. Deleting a record in organics
 router.delete("/organics/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -84,10 +84,10 @@ router.delete("/organics/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Orgánico no encontrado" });
+            return res.status(404).json({ mensaje: "Organic not found" });
         }
 
-        res.json({ mensaje: "Orgánico eliminado exitosamente" });
+        res.json({ mensaje: "Organic successfully removed" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -95,7 +95,7 @@ router.delete("/organics/:id", async (req, res) => {
 
 //products//
 
-// 1. Obtener todos los registros de products
+// 1. Get all product records
 router.get("/products", async (req, res) => {
     try {
         const [rows] = await pool.query(`SELECT * FROM products`);
@@ -105,7 +105,7 @@ router.get("/products", async (req, res) => {
     }
 });
 
-// 2. Obtener un registro de products por ID
+// 2. Get a product record by ID
 router.get("/products/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -114,7 +114,7 @@ router.get("/products/:id", async (req, res) => {
             [id]
         );
         if (rows.length === 0) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+            return res.status(404).json({ mensaje: "Product not found" });
         }
         res.json(rows[0]);
     } catch (error) {
@@ -122,13 +122,13 @@ router.get("/products/:id", async (req, res) => {
     }
 });
 
-// 3. Crear un registro en products
+// 3. Create a record in products
 router.post("/products", async (req, res) => {
     try {
         const { ground_type, irrigation_system, used_fertilizer, id_organic } = req.body;
 
         if (!ground_type || !irrigation_system || !used_fertilizer) {
-            return res.status(400).json({ mensaje: "Faltan campos requeridos" });
+            return res.status(400).json({ mensaje: "Required fields are missing" });
         }
 
         const [result] = await pool.query(
@@ -137,13 +137,13 @@ router.post("/products", async (req, res) => {
             [ground_type, irrigation_system, used_fertilizer, id_organic || null]
         );
 
-        res.status(201).json({ mensaje: "Producto creado exitosamente", id: result.insertId });
+        res.status(201).json({ mensaje: "Successfully created product", id: result.insertId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Actualizar un registro en products
+// 4. Update a record in products
 router.put("/products/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -156,16 +156,16 @@ router.put("/products/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+            return res.status(404).json({ mensaje: "Product not found" });
         }
 
-        res.json({ mensaje: "Producto actualizado exitosamente" });
+        res.json({ mensaje: "Product updated successfully" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 5. Eliminar un registro en products
+// 5. Delete a record in products
 router.delete("/products/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -176,20 +176,20 @@ router.delete("/products/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+            return res.status(404).json({ mensaje: "Product not found" });
         }
 
-        res.json({ mensaje: "Producto eliminado exitosamente" });
+        res.json({ mensaje: "Product successfully removed" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
+
 //crops//
 
-// --- Código para la tabla crops ---
 
-// 1. Obtener todos los registros de crops
+// 1. Get all crop records
 router.get("/crops", async (req, res) => {
     try {
         const [rows] = await pool.query(`SELECT * FROM crops`);
@@ -199,7 +199,7 @@ router.get("/crops", async (req, res) => {
     }
 });
 
-// 2. Obtener un registro de crops por ID
+// 2. Get a crop record by ID
 router.get("/crops/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -208,7 +208,7 @@ router.get("/crops/:id", async (req, res) => {
             [id]
         );
         if (rows.length === 0) {
-            return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+            return res.status(404).json({ mensaje: "Crop not found" });
         }
         res.json(rows[0]);
     } catch (error) {
@@ -216,13 +216,13 @@ router.get("/crops/:id", async (req, res) => {
     }
 });
 
-// 3. Crear un registro en crops
+// 3. Create a record in crops
 router.post("/crops", async (req, res) => {
     try {
         const { variety_corp, type_corp, value, production, date_time } = req.body;
 
         if (!variety_corp || !type_corp || !value || !production || !date_time) {
-            return res.status(400).json({ mensaje: "Faltan campos requeridos" });
+            return res.status(400).json({ mensaje: "Required fields are missing" });
         }
 
         const [result] = await pool.query(
@@ -231,13 +231,13 @@ router.post("/crops", async (req, res) => {
             [variety_corp, type_corp, value, production, date_time]
         );
 
-        res.status(201).json({ mensaje: "Cultivo creado exitosamente", id: result.insertId });
+        res.status(201).json({ mensaje: "Crop successfully created", id: result.insertId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Actualizar un registro en crops
+// 4. Update a record in crops
 router.put("/crops/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -250,16 +250,16 @@ router.put("/crops/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+            return res.status(404).json({ mensaje: "Crop not found" });
         }
 
-        res.json({ mensaje: "Cultivo actualizado exitosamente" });
+        res.json({ mensaje: "Crop successfully updated" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 5. Eliminar un registro en crops
+// 5. Deleting a record in Crops
 router.delete("/crops/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -270,10 +270,10 @@ router.delete("/crops/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Cultivo no encontrado" });
+            return res.status(404).json({ mensaje: "Crop not found" });
         }
 
-        res.json({ mensaje: "Cultivo eliminado exitosamente" });
+        res.json({ mensaje: "Crop successfully removed" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -282,7 +282,7 @@ router.delete("/crops/:id", async (req, res) => {
 //sensors//
 
 
-// 1. Obtener todos los registros de sensors
+// 1. Get all sensor logs
 router.get("/sensors", async (req, res) => {
     try {
         const [rows] = await pool.query(`SELECT * FROM sensors`);
@@ -292,7 +292,7 @@ router.get("/sensors", async (req, res) => {
     }
 });
 
-// 2. Obtener un registro de sensors por ID
+// 2. Get a sensor log by ID
 router.get("/sensors/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -301,7 +301,7 @@ router.get("/sensors/:id", async (req, res) => {
             [id]
         );
         if (rows.length === 0) {
-            return res.status(404).json({ mensaje: "Sensor no encontrado" });
+            return res.status(404).json({ mensaje: "Sensor not found" });
         }
         res.json(rows[0]);
     } catch (error) {
@@ -309,13 +309,13 @@ router.get("/sensors/:id", async (req, res) => {
     }
 });
 
-// 3. Crear un registro en sensors
+// 3. Create a record in sensors
 router.post("/sensors", async (req, res) => {
     try {
         const { id_of_sensor, type_sensor, estate_sensor } = req.body;
 
         if (!id_of_sensor || !type_sensor || !estate_sensor) {
-            return res.status(400).json({ mensaje: "Faltan campos requeridos" });
+            return res.status(400).json({ mensaje: "Required fields are missing" });
         }
 
         const [result] = await pool.query(
@@ -324,17 +324,17 @@ router.post("/sensors", async (req, res) => {
             [id_of_sensor, type_sensor, estate_sensor]
         );
 
-        res.status(201).json({ mensaje: "Sensor creado exitosamente", id: result.insertId });
+        res.status(201).json({ mensaje: "Sensor created successfully", id: result.insertId });
     } catch (error) {
         // Error por id_of_sensor duplicado
         if (error.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ mensaje: "El id_of_sensor ya existe" });
+            return res.status(400).json({ mensaje: "The id_of_sensor already exists" });
         }
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Actualizar un registro en sensors
+// 4. Update a record in sensors
 router.put("/sensors/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -347,20 +347,20 @@ router.put("/sensors/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Sensor no encontrado" });
+            return res.status(404).json({ mensaje: "Sensor not found" });
         }
 
-        res.json({ mensaje: "Sensor actualizado exitosamente" });
+        res.json({ mensaje: "Sensor updated successfully" });
     } catch (error) {
         // Error por id_of_sensor duplicado
         if (error.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ mensaje: "El id_of_sensor ya existe" });
+            return res.status(400).json({ mensaje: "The id_of_sensor already exists" });
         }
         res.status(500).json({ error: error.message });
     }
 });
 
-// 5. Eliminar un registro en sensors
+// 5. Deleting a record in sensors
 router.delete("/sensors/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -371,10 +371,10 @@ router.delete("/sensors/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Sensor no encontrado" });
+            return res.status(404).json({ mensaje: "Sensor not found" });
         }
 
-        res.json({ mensaje: "Sensor eliminado exitosamente" });
+        res.json({ mensaje: "Sensor successfully removed" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -382,7 +382,7 @@ router.delete("/sensors/:id", async (req, res) => {
 
 //technicians//
 
-// 1. Obtener todos los registros de technicians
+// 1. Get all technician records
 router.get("/technicians", async (req, res) => {
     try {
         const [rows] = await pool.query(`SELECT * FROM technicians`);
@@ -392,7 +392,7 @@ router.get("/technicians", async (req, res) => {
     }
 });
 
-// 2. Obtener un registro de technicians por ID
+// 2. Get a record of technicians by ID
 router.get("/technicians/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -401,7 +401,7 @@ router.get("/technicians/:id", async (req, res) => {
             [id]
         );
         if (rows.length === 0) {
-            return res.status(404).json({ mensaje: "Técnico no encontrado" });
+            return res.status(404).json({ mensaje: "Technician not found" });
         }
         res.json(rows[0]);
     } catch (error) {
@@ -409,13 +409,13 @@ router.get("/technicians/:id", async (req, res) => {
     }
 });
 
-// 3. Crear un registro en technicians
+// 3. Create a record in technicians
 router.post("/technicians", async (req, res) => {
     try {
         const { technician, date_maintenance, id_sensor } = req.body;
 
         if (!technician || !date_maintenance) {
-            return res.status(400).json({ mensaje: "Faltan campos requeridos" });
+            return res.status(400).json({ mensaje: "Required fields are missing" });
         }
 
         const [result] = await pool.query(
@@ -424,13 +424,13 @@ router.post("/technicians", async (req, res) => {
             [technician, date_maintenance, id_sensor || null]
         );
 
-        res.status(201).json({ mensaje: "Técnico creado exitosamente", id: result.insertId });
+        res.status(201).json({ mensaje: "Technician created successfully", id: result.insertId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Actualizar un registro en technicians
+// 4. Update a record in technicians
 router.put("/technicians/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -443,16 +443,16 @@ router.put("/technicians/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Técnico no encontrado" });
+            return res.status(404).json({ mensaje: "Technician not found" });
         }
 
-        res.json({ mensaje: "Técnico actualizado exitosamente" });
+        res.json({ mensaje: "Technician successfully updated" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 5. Eliminar un registro en technicians
+// 5. Delete a record in technicians
 router.delete("/technicians/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -463,10 +463,10 @@ router.delete("/technicians/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Técnico no encontrado" });
+            return res.status(404).json({ mensaje: "Technician not found" });
         }
 
-        res.json({ mensaje: "Técnico eliminado exitosamente" });
+        res.json({ mensaje: "Technician successfully eliminated" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -475,7 +475,7 @@ router.delete("/technicians/:id", async (req, res) => {
 //farms//
 
 
-// 1. Obtener todos los registros de farms
+// 1. Get all farm records
 router.get("/farms", async (req, res) => {
     try {
         const [rows] = await pool.query(`SELECT * FROM farms`);
@@ -485,7 +485,7 @@ router.get("/farms", async (req, res) => {
     }
 });
 
-// 2. Obtener un registro de farms por ID
+// 2. Get a farm record by ID
 router.get("/farms/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -494,7 +494,7 @@ router.get("/farms/:id", async (req, res) => {
             [id]
         );
         if (rows.length === 0) {
-            return res.status(404).json({ mensaje: "Finca no encontrada" });
+            return res.status(404).json({ mensaje: "Property not found" });
         }
         res.json(rows[0]);
     } catch (error) {
@@ -502,13 +502,13 @@ router.get("/farms/:id", async (req, res) => {
     }
 });
 
-// 3. Crear un registro en farms
+// 3. Create a record in farms
 router.post("/farms", async (req, res) => {
     try {
         const { name_farm, region, id_corp, id_sensor, id_product } = req.body;
 
         if (!name_farm || !region) {
-            return res.status(400).json({ mensaje: "Faltan campos requeridos" });
+            return res.status(400).json({ mensaje: "Required fields are missing" });
         }
 
         const [result] = await pool.query(
@@ -517,13 +517,13 @@ router.post("/farms", async (req, res) => {
             [name_farm, region, id_corp || null, id_sensor || null, id_product || null]
         );
 
-        res.status(201).json({ mensaje: "Finca creada exitosamente", id: result.insertId });
+        res.status(201).json({ mensaje: "Successfully created farm", id: result.insertId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Actualizar un registro en farms
+// 4. Update a record in farms
 router.put("/farms/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -536,16 +536,16 @@ router.put("/farms/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Finca no encontrada" });
+            return res.status(404).json({ mensaje: "Property not found" });
         }
 
-        res.json({ mensaje: "Finca actualizada exitosamente" });
+        res.json({ mensaje: "Farm successfully updated" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// 5. Eliminar un registro en farms
+// 5. Deleting a record in farms
 router.delete("/farms/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -556,10 +556,10 @@ router.delete("/farms/:id", async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ mensaje: "Finca no encontrada" });
+            return res.status(404).json({ mensaje: "Property not found" });
         }
 
-        res.json({ mensaje: "Finca eliminada exitosamente" });
+        res.json({ mensaje: "Farm successfully deleted" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
