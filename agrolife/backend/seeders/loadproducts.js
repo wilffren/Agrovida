@@ -4,7 +4,7 @@ import csv from 'csv-parser';
 import { pool } from "../server/conection_db.js";
 
 export async function loadProducts() {
-    const filePath = path.resolve('server/data/products.csv');
+    const filePath = path.resolve('../server/data/products.csv');
     const products = [];
 
     return new Promise((resolve, reject) => {
