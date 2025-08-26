@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import path from "path";
 import fs from "fs";
+import router from "./routes/routes.js"; 
 
 const app = express();
 
@@ -20,6 +21,9 @@ app.get("/csv/:filename", (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+// monta las rutas de organics y demás en la raíz
+app.use("/", router);
+
+app.listen(3001, () => {
     console.log("server running on http://localhost:3001");
 });
