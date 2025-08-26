@@ -11,18 +11,24 @@ export async function loadTechnicians() {
         fs.createReadStream(filePath)
             .pipe(csv())
             .on("data", (row) => {
-                technicians.push([
-                    row.id_technician,
-                    row.technician,
-                    row.date_maintenance,
-                    row.id_sensor || null
-                ]);
+                const tech = row["technician"] || row["technician "];
+                if (tech && tech.trim() !== "") {
+                    technicians.push([
+                        tech.trim(),
+                        row.date_maintenance
+                    ]);
+                }
             })
             .on('end', async () => {
                 try {
-                    const sql = 'INSERT INTO technicians (id_technician, technician, date_maintenance, id_sensor) VALUES ?';
+                    if (technicians.length === 0) {
+                        console.log("⚠️ There is no valid data to insert into technicians.");
+                        resolve();
+                        return;
+                    }
+                    const sql = 'INSERT INTO technicians (technician, date_maintenance) VALUES ?';
                     const [result] = await pool.query(sql, [technicians]);
-                    console.log(`✅ inserts ${result.affectedRows} registers on technicians.`);
+                    console.log(`✅ inserts ${result.affectedRows} registros en technicians.`);
                     resolve();
                 } catch (error) {
                     console.error('❌ Error to insert technicians:', error.message);
