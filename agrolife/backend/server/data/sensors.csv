@@ -1,0 +1,16 @@
+id_of_sensor,type_sensor,estate_sensor
+SENS001,Rainfall,Inactive
+SENS002,Temperature,Active
+SENS003,Humidity,Active
+SENS004,Temperature,Active
+SENS005,Temperature,Faulty
+SENS006,pH,Inactive
+SENS007,pH,Faulty
+SENS008,Humidity,Active
+SENS009,Humidity,Inactive
+SENS010,Temperature,Active
+SENS011,Humidity,Inactive
+SENS012,Rainfall,Inactive
+SENS013,pH,Faulty
+SENS014,Temperature,Faulty
+SENS015,Rainfall,Inactive
